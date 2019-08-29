@@ -15,8 +15,7 @@ public class MathCalculator extends CordovaPlugin {
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         if (action.equals("substract")) {
-            String message = args.getString(0);
-            this.substract(message, callbackContext);
+             this.substract(args, callbackContext);
             return true;
         }
         else if (action.equals("add")){
@@ -31,15 +30,12 @@ public class MathCalculator extends CordovaPlugin {
             try {
                 int p1 = Integer.parseInt(args.getJSONObject(0).getString("param1"));
                 int p2 = Integer.parseInt(args.getJSONObject(0).getString("param2"));
-
                 callback.success(""+(p1-p2));
-
             } catch(Exception e){
-                callback.erro("Something went wrong "+ e);
+                callback.error("Something went wrong "+ e);
             }
-        }else{
-            callback.error("Please do not pass null values");
         }
+        else{ callback.error("Please do not pass null values"); }
     }
 
     private void add(JSONArray args, CallbackContext callback){
@@ -47,14 +43,11 @@ public class MathCalculator extends CordovaPlugin {
             try {
                 int p1 = Integer.parseInt(args.getJSONObject(0).getString("param1"));
                 int p2 = Integer.parseInt(args.getJSONObject(0).getString("param2"));
-
                 callback.success(""+(p1+p2));
-
             } catch(Exception e){
-                callback.erro("Something went wrong "+ e);
+                callback.error("Something went wrong "+ e);
             }
-        }else{
-            callback.error("Please do not pass null values");
         }
+        else{  callback.error("Please do not pass null values");  }
     }
 }
